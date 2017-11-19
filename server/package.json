@@ -1,0 +1,17 @@
+{
+  "name": "authentication-server",
+  "version": "1.0.0",
+  "description": "Authentication server prototype",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Authentication",
+    "server",
+    "node",
+    "prototype"
+  ],
+  "author": "Jiri Podlipny",
+  "license": "ISC"
+}
