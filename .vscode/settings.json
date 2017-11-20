@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+      "**/client/**/*.js.map": true,
+      "**/client/**/*.js": true,
+      "**/node_modules/**/": true
+    }
+}

@@ -4,7 +4,11 @@
   "description": "Authentication server prototype",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "server": "node server.js",
+    "debug": "node --inspect=5858 server.js",
+    "start": "concurrently \"npm run tsc:w\" \"nodemon server.ts\""
   },
   "keywords": [
     "Authentication",
@@ -13,5 +17,15 @@
     "prototype"
   ],
   "author": "Jiri Podlipny",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.4"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "typescript": "^2.6.1"
+  }
 }
