@@ -15,6 +15,8 @@ const log    = require('./tools/logger');
 const configDB = require('./config/database.js');
 const mongoose = require('mongoose');
 
+const passport = require('passport');
+
 
 class Server {
   constructor() {
@@ -27,20 +29,28 @@ class Server {
     this.start();
   }
 
-  // configuration ===============================================================
   initConfiguration(){
     mongoose.connect(configDB.url, { useMongoClient: true });
   }
 
   initExpressMiddleWare() {
-    // app.use(express.static(__dirname + "/public")); We dont need static folder for API
-    app.use(morgan('dev')); // log every request to the console
+    //app.use(express.static(__dirname + "/public")); We dont need static folder for API
+    app.use(morgan('dev')); //log every request to the console
     
+    app.use(cookieParser()); //read cookies (needed for auth)
+    app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({
       extended: true
     }));
-    app.use(bodyParser.json());
-    app.use(cookieParser());
+    
+    //required for passport
+    app.use(session({
+        secret: 'somesecretforsessionsomesecretforsession', //session secret
+        resave: true,
+        saveUninitialized: true
+    }));
+    app.use(passport.initialize());
+    app.use(passport.session()); //persistent login sessions
 
     process.on("uncaughtException", err => {
       if (err) 
@@ -54,12 +64,10 @@ class Server {
     // });
   }
 
-  // routes ======================================================================
   initRoutes() {
     router.load(app, "./controllers");
   }
 
-  // launch ======================================================================
   start() {
     app.listen(port, err => {
       log.success('[' + process.env.NODE_ENV + ']' + 'Listening on http://localhost:' + port);
