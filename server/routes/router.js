@@ -1,6 +1,7 @@
-const   fs      = require('fs'),
-        path    = require('path'),
-        express = require('express');
+const fs      = require('fs');
+const path    = require('path');
+const express = require('express');
+const log     = require('../tools/logger'); 
 
 class Router {
 
@@ -34,7 +35,7 @@ class Router {
                 const router = express.Router();
                 //Generate the route
                 const baseRoute = '/' + dirs.join('/');
-                console.log('Created route: ' + baseRoute + ' for ' + fullName);
+                log.info('Created route: ' + baseRoute + ' for ' + fullName);
 
                 //Load the JavaScript file ("controller") and pass the router to it
                 const controllerClass = require('../' + fullName);

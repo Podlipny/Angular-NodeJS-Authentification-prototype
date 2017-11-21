@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const router = require('./routes/router');
 const app    = express();
 const port   = process.env.PORT || 3000;
+const log    = require('./tools/logger'); 
 
 const configDB = require('./config/database.js');
 const mongoose = require('mongoose');
@@ -42,7 +43,8 @@ class Server {
     app.use(cookieParser());
 
     process.on("uncaughtException", err => {
-      if (err) console.log(err, err.stack);
+      if (err) 
+        log.error(err, err.stack);
     });
   }
 
@@ -60,7 +62,7 @@ class Server {
   // launch ======================================================================
   start() {
     app.listen(port, err => {
-      console.log("[%s] Listening on http://localhost:%d",  process.env.NODE_ENV, port);
+      log.success('[' + process.env.NODE_ENV + ']' + 'Listening on http://localhost:' + port);
     });
   }
 }

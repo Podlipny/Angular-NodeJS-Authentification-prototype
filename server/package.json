@@ -21,11 +21,13 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
+    "chalk": "^2.3.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "mongoose": "^4.13.4",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "string-template": "^1.0.0"
   },
   "devDependencies": {
     "concurrently": "^3.5.0",

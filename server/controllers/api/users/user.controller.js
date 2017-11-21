@@ -39,7 +39,19 @@ class UserController{
     });
   }
 
-  updateUser(req, res) {}
+  updateUser(req, res) {
+    console.log('*** updateUser');
+    
+    userRepo.updateUser(req.params.id, req.body, (err, user) => {
+      if (err) {
+        console.log('*** userRepo.updateUser error: ' + util.inspect(err));
+        res.json({status: false, error: 'Insert failed', user: null});
+      } else {
+        console.log('*** updateUser ok');
+        res.json({ status: true, error: null, user: user });
+      }
+    });
+  }
   
   deleteUser(req, res) {
     console.log('*** deleteUser');
