@@ -16,6 +16,7 @@ const configDB = require('./config/database.js');
 const mongoose = require('mongoose');
 
 const passport = require('passport');
+const passportConfig = require('./config/passport');
 
 
 class Server {
@@ -31,6 +32,7 @@ class Server {
 
   initConfiguration(){
     mongoose.connect(configDB.url, { useMongoClient: true });
+    passportConfig(passport);
   }
 
   initExpressMiddleWare() {
