@@ -46,9 +46,13 @@ class Server {
     
     //required for passport
     app.use(session({
-        secret: 'somesecretforsessionsomesecretforsession', //session secret
-        resave: true,
-        saveUninitialized: true
+      secret: 'somesecretforsessionsomesecretforsession', //session secret
+      resave: true,
+      saveUninitialized: true
+      // cookie: {
+      //   maxAge: 60 * 1000
+      // },
+      // rolling: true
     }));
     app.use(passport.initialize());
     app.use(passport.session()); //persistent login sessions

@@ -27,9 +27,6 @@ class PassportLocal{
   }
 
   login(req, email, password, done){    
-    if(req.user && req.user.email === email)
-      return done(null, false, { success: false, message: 'You need to logout, before another loging in!'});
-    
     if (email)
       email = email.toLowerCase(); //Use lower-case e-mails to avoid case-sensitive e-mail matching
 
