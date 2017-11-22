@@ -18,7 +18,6 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const passportConfig = require('./config/passport');
 
-
 class Server {
   constructor() {
     this.initConfiguration();
@@ -68,6 +67,7 @@ class Server {
 
   initRoutes() {
     router.load(app, "./controllers");
+    router.auth(app, passport);
   }
 
   start() {

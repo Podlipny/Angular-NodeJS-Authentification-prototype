@@ -18,7 +18,7 @@ class Passport{
       });
     });
 
-    
+    passportLocal(passport);
   }
 }
 
