@@ -18,7 +18,9 @@ class Passport{
       });
     });
 
+    //load strategies configuration
     passportLocal(passport);
+    passportfacebook(passport);
   }
 }
 

@@ -69,12 +69,15 @@ class PassportLocal{
             return done(null, false, { success: false, message: 'That email is already taken.'});
           } else {
             //create the user
-            var newUser = new UserModel();
-            newUser.email = email;
-            newUser.local.email = email;
-            newUser.local.password = newUser.generateHash(password);
+            var newUser = {
+              email: email,
+              local:{
+                email: email,
+                password: newUser.generateHash(password)
+              }
+            };
 
-            newUser.save(function (err) {
+            userRepo.insertUser(newUser, function (err) {
               if (err) 
                 return done(err);
               
@@ -100,7 +103,7 @@ class PassportLocal{
               user.email = email;
             user.local.email = email;
             user.local.password = user.generateHash(password);
-            user.save(function (err) {
+            userRepo.updateUser(user, function (err) {
               if (err) 
                 return done(err);
               

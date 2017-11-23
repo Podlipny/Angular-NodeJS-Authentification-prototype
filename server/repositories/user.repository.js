@@ -35,7 +35,19 @@ class UserRepository{
     let user = new userModel();
     user.name = body.name;
     user.email = body.email;
-    
+    if(body.local){
+      user.local = body.local;
+    }
+    if(body.facebook){
+      user.facebook = body.facebook;
+    }
+    if(body.twitter){
+      user.twitter = body.twitter;
+    }
+    if(body.google){
+      user.google = body.google;
+    }
+
     user.save((err, user) => {
       if (err) { 
         log.error(`*** UserRepository insertUser error: ${err}`); 
@@ -57,6 +69,19 @@ class UserRepository{
 
       user.name = body.name || user.name;
       user.email = body.email || user.email;
+
+      if(user.local){
+        user.local = body.local || user.local;
+      }
+      if(user.facebook){
+        user.facebook = body.facebook || user.facebook;
+      }
+      if(user.twitter){
+        user.twitter = body.twitter || user.twitter;
+      }
+      if(user.google){
+        user.google = body.google || user.google;
+      }
 
       user.save((err, user) => {
         if (err) { 

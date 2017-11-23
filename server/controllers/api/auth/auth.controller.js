@@ -1,5 +1,3 @@
-// const userRepo = require('../../../repositories/user.repository'); 
-
 class AuthController {
   constructor(router, passport){
 
@@ -11,11 +9,16 @@ class AuthController {
       res.json({'success': true});
     });
 
+    router.get('/facebook', passport.authenticate('facebook', { scope : ['public_profile', 'email'] }));
+    
+    //handle the callback after facebook has authenticated the user
+    router.get('/facebook/callback', this.login(passport));
+
   }
   
   login(passport) {
     return (req, res, next) => {
-      passport.authenticate('local-login', function(err, user, info) {
+      passport.authenticate('facebook', function(err, user, info) {
         if (err) { return next(err); }
         if (!user) { return res.json(info); }
         
