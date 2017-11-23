@@ -1,5 +1,5 @@
 const passportLocal = require('./passport.local');
-const passportfacebook = require('./passport.facebook');
+const passportFacebook = require('./passport.facebook');
 const userModel = require('../models/user');
 
 class Passport{
@@ -20,7 +20,7 @@ class Passport{
 
     //load strategies configuration
     passportLocal(passport);
-    passportfacebook(passport);
+    passportFacebook(passport);
   }
 }
 

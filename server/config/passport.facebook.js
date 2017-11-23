@@ -7,9 +7,7 @@ class Passportfacebook{
   config(passport){
     var fbStrategy = passportConfig.facebookAuth;
     fbStrategy.passReqToCallback = true;  //allows us to pass in the req from our route (lets us check if a user is logged in or not)
-    passport.use(new FacebookStrategy(fbStrategy, function(req, token, refreshToken, profile, done){
-      console.log('facebook passport test');
-    }));
+    passport.use(new FacebookStrategy(fbStrategy, this.authenticate.bind(this)));
   }
 
   authenticate(req, token, refreshToken, profile, done) {
@@ -66,7 +64,7 @@ class Passportfacebook{
           user.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
           user.facebook.email = (profile.emails[0].value || '').toLowerCase();
 
-          user.updateUser(user, function (err) {
+          userRepo.updateUser(user, function (err) {
             if (err) 
               return done(err);
             

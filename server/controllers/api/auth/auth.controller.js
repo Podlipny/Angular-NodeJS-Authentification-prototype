@@ -1,7 +1,7 @@
 class AuthController {
   constructor(router, passport){
 
-    router.post('/login', this.login(passport));
+    router.post('/login', this.login(passport, 'local-login'));
     router.post('/register', this.register(passport));
 
     router.get('/logout', (req, res) => {
@@ -12,13 +12,13 @@ class AuthController {
     router.get('/facebook', passport.authenticate('facebook', { scope : ['public_profile', 'email'] }));
     
     //handle the callback after facebook has authenticated the user
-    router.get('/facebook/callback', this.login(passport));
+    router.get('/facebook/callback', this.login(passport, 'facebook'));
 
   }
   
-  login(passport) {
+  login(passport, strategy) {
     return (req, res, next) => {
-      passport.authenticate('facebook', function(err, user, info) {
+      passport.authenticate(strategy, function(err, user, info) {
         if (err) { return next(err); }
         if (!user) { return res.json(info); }
         
