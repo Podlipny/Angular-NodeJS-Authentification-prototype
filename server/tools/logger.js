@@ -16,7 +16,7 @@ class Logger{
   }
 
   trace(message){
-    console.log(format('[trace] {0}' [message]));
+    console.log(format('[trace] {0}', [message]));
   }
 
   debug(message){

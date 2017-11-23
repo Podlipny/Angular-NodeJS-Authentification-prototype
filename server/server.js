@@ -50,6 +50,7 @@ class Server {
       resave: true,
       saveUninitialized: true
       // cookie: {
+      //   secure: true,
       //   maxAge: 60 * 1000
       // },
       // rolling: true

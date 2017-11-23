@@ -1,5 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
-const UserModel   = require('../models/user');
+const userRepo   = require('../repositories/user.repository');
 
 class PassportLocal{
   
@@ -32,7 +32,7 @@ class PassportLocal{
 
     //asynchronous
     process.nextTick(function () {
-      UserModel.findOne({'local.email': email }, function (err, user) {
+      userRepo.getUser({'local.email': email }, function (err, user) {
         // if there are any errors, return the error
         if (err)
           return done(err);
@@ -59,7 +59,7 @@ class PassportLocal{
     process.nextTick(function () {
       //if the user is not already logged in:
       if (!req.user) {
-        UserModel.findOne({'local.email': email}, function (err, user) {
+        userRepo.getUser({'local.email': email}, function (err, user) {
           //if there are any errors, return the error
           if (err) 
             return done(err);
@@ -87,7 +87,7 @@ class PassportLocal{
       } else if (!req.user.local.email) {
         //...presumably they're trying to connect a local account BUT let's check if
         //the email used to connect a local account is being used by another user
-        UserModel.findOne({'local.email': email}, function (err, user) {
+        userRepo.getUser({'local.email': email}, function (err, user) {
           if (err) 
             return done(err);
           

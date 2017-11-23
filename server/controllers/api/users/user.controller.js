@@ -1,5 +1,6 @@
 const userRepo = require('../../../repositories/user.repository');
 const util = require('util'); //NodeJs Util pro logging
+const log  = require('../../../tools/logger'); 
 
 class UserController{
   constructor(router){
@@ -11,57 +12,57 @@ class UserController{
   }
 
   getUsers(req, res) {
-    console.log('*** getUsers');
+    log.trace('*** getUsers');
 
     userRepo.getUsers((err, users) => {
       if (err) {
-        console.log('*** getUsers error: ' + util.inspect(err));
+        log.error('*** getUsers error: ' + util.inspect(err));
         res.json(null); //TODO: report error to user and set state
         //res.json({ error: err }); tot je dalsi moznost
       } else {
-        console.log('*** getUsers ok');
+        log.trace('*** getUsers ok');
         res.json(users);
       }
     });
   }
 
   insertUser(req, res) {
-    console.log('*** insertUser');
+    log.trace('*** insertUser');
     
     userRepo.insertUser(req.body, (err, user) => {
       if (err) {
-        console.log('*** userRepo.insertUser error: ' + util.inspect(err));
+        log.error('*** userRepo.insertUser error: ' + util.inspect(err));
         res.json({status: false, error: 'Insert failed', user: null});
       } else {
-        console.log('*** insertUser ok');
+        log.trace('*** insertUser ok');
         res.json({ status: true, error: null, user: user });
       }
     });
   }
 
   updateUser(req, res) {
-    console.log('*** updateUser');
+    log.trace('*** updateUser');
     
     userRepo.updateUser(req.params.id, req.body, (err, user) => {
       if (err) {
-        console.log('*** userRepo.updateUser error: ' + util.inspect(err));
+        log.error('*** userRepo.updateUser error: ' + util.inspect(err));
         res.json({status: false, error: 'Insert failed', user: null});
       } else {
-        console.log('*** updateUser ok');
+        log.trace('*** updateUser ok');
         res.json({ status: true, error: null, user: user });
       }
     });
   }
   
   deleteUser(req, res) {
-    console.log('*** deleteUser');
+    log.trace('*** deleteUser');
     
     userRepo.deleteUser(req.params.id, (err) => {
       if (err) {
-        console.log('*** deleteUser error: ' + util.inspect(err));
+        log.error('*** deleteUser error: ' + util.inspect(err));
         res.json({ status: false });
       } else {
-        console.log('*** deleteUser ok');
+        log.trace('*** deleteUser ok');
         res.json({ status: true });
       }
     });

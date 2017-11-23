@@ -1,24 +1,36 @@
-const mongoose = require('mongoose');
+const mongoose  = require('mongoose');
 const userModel = require('../models/user');
+const log       = require('../tools/logger');
 
 class UserRepository{
   
   //get all the users
   getUsers(callback) {
-    console.log('*** UserRepository.getUsers');
+    log.trace('*** UserRepository.getUsers');
     userModel.find({}, (err, users) => {
       if (err) { 
-        console.log(`*** UserRepository.getUsers error: ${err}`); 
+        log.trace(`*** UserRepository.getUsers error: ${err}`); 
         return callback(err); 
       }
       callback(null, users);
     });
   }
 
+  //get all the users
+  getUser(query, callback) {
+    log.trace('*** UserRepository.getUser');
+    userModel.findOne(query, (err, user) => {
+      if (err) { 
+        log.trace(`*** UserRepository.getUser error: ${err}`); 
+        return callback(err); 
+      }
+      callback(null, user);
+    });
+  }
+
   //insert a  user
   insertUser(body, callback) {
-    console.log('*** UserRepository.insertUser');
-    console.log(body);
+    log.trace('*** UserRepository.insertUser\n' + body);
 
     let user = new userModel();
     user.name = body.name;
@@ -26,8 +38,8 @@ class UserRepository{
     
     user.save((err, user) => {
       if (err) { 
-          console.log(`*** UserRepository insertUser error: ${err}`); 
-          return callback(err, null); 
+        log.error(`*** UserRepository insertUser error: ${err}`); 
+        return callback(err, null); 
       }
 
       callback(null, user);
@@ -35,11 +47,11 @@ class UserRepository{
   }
 
   updateUser(id, body, callback) {
-    console.log('*** UserRepository.updateUser');
+    log.error('*** UserRepository.updateUser');
 
     userModel.findById(id, (err, user)  => {
       if (err) { 
-        console.log(`*** UserRepository.updateUser error: ${err}`); 
+        log.error(`*** UserRepository.updateUser error: ${err}`); 
         return callback(err); 
       }
 
@@ -48,8 +60,8 @@ class UserRepository{
 
       user.save((err, user) => {
         if (err) { 
-            console.log(`*** UserRepository.updateUser error: ${err}`); 
-            return callback(err, null); 
+          log.error(`*** UserRepository.updateUser error: ${err}`); 
+          return callback(err, null); 
         }
 
         callback(null, user);
@@ -59,11 +71,11 @@ class UserRepository{
 
   //delete a user
   deleteUser(id, callback) {
-    console.log('*** UserRepository.deleteUser');
+    log.trace('*** UserRepository.deleteUser');
 
     userModel.remove({ '_id': id }, (err, user) => {
         if (err) { 
-          console.log(`*** UserRepository.deleteUser error: ${err}`); 
+          log.error(`*** UserRepository.deleteUser error: ${err}`); 
           return callback(err, null); 
         }
         callback(null, user);
