@@ -59,7 +59,7 @@ class UserRepository{
   }
 
   updateUser(id, body, callback) {
-    log.error('*** UserRepository.updateUser');
+    log.trace('*** UserRepository.updateUser');
 
     userModel.findById(id, (err, user)  => {
       if (err) { 
