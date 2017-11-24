@@ -71,17 +71,17 @@ class PassportLocal{
             //create the user
             var newUser = {
               email: email,
-              local:{
+              local: {
                 email: email,
-                password: newUser.generateHash(password)
+                password: password
               }
             };
 
-            userRepo.insertUser(newUser, function (err) {
+            userRepo.insertUser(newUser, function (err, user) {
               if (err) 
                 return done(err);
               
-              return done(null, newUser);
+              return done(null, user);
             });
           }
 

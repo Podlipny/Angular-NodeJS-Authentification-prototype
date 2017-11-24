@@ -7,16 +7,16 @@ const cookieParser = require('cookie-parser');
 // database        = require('./lib/database'),
 // seeder          = require('./lib/dbSeeder'),
 
-const router = require('./routes/router');
+const router = require('./server/routes/router');
 const app    = express();
 const port   = process.env.PORT || 3000;
-const log    = require('./tools/logger'); 
+const log    = require('./server/tools/logger'); 
 
-const configDB = require('./config/database.js');
+const configDB = require('./server/config/database.js');
 const mongoose = require('mongoose');
 
 const passport = require('passport');
-const passportConfig = require('./config/passport');
+const passportConfig = require('./server/config/passport');
 
 class Server {
   constructor() {
@@ -71,7 +71,7 @@ class Server {
   }
 
   initRoutes() {
-    router.load(app, "./controllers");
+    router.load(app, "controllers");
     router.auth(app, passport);
   }
 

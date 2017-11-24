@@ -8,7 +8,7 @@
     "tsc:w": "tsc -w",
     "server": "set NODE_ENV=development&& nodemon server.js",
     "debug": "node --inspect=5858 server.js",
-    "start": "concurrently \"npm run tsc:w\" \"nodemon server.ts\""
+    "start": "concurrently \"npm run tsc:w\" \"nodemon server.js\""
   },
   "keywords": [
     "Authentication",

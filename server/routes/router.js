@@ -16,10 +16,10 @@ class Router {
     if (!this.startFolder) 
       this.startFolder = path.basename(folderName);
     
-    fs.readdirSync(folderName).forEach((file) => {
+    fs.readdirSync('./server/' + folderName).forEach((file) => {
 
       const fullName = path.join(folderName, file);
-      const stat = fs.lstatSync(fullName);
+      const stat = fs.lstatSync('./server/' + fullName);
 
       //Recursively walk-through folders
       if (stat.isDirectory()) {

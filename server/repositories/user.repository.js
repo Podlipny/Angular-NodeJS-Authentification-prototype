@@ -36,7 +36,10 @@ class UserRepository{
     user.name = body.name;
     user.email = body.email;
     if(body.local){
-      user.local = body.local;
+      user.local = {
+        email: body.local.email,
+        password: user.generateHash(body.local.password)
+      };
     }
     if(body.facebook){
       user.facebook = body.facebook;
