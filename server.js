@@ -35,7 +35,7 @@ class Server {
   }
 
   initExpressMiddleWare() {
-    //app.use(express.static(__dirname + "/public")); We dont need static folder for API
+    app.use(express.static(__dirname + "/public"));
     app.use(morgan('dev')); //log every request to the console
     
     app.use(cookieParser()); //read cookies (needed for auth)

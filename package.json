@@ -2,13 +2,22 @@
   "name": "authentication-server",
   "version": "1.0.0",
   "description": "Authentication server prototype",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "tsc": "tsc",
     "tsc:w": "tsc -w",
+    "lint": "concurrently \"tsc:w\" \"nodemon server.js\"",    
+    
     "server": "set NODE_ENV=development&& nodemon server.js",
-    "debug": "node --inspect=5858 server.js",
-    "start": "concurrently \"npm run tsc:w\" \"nodemon server.js\""
+    "install:prod": "npm install --only=production",
+    "build-client:dev": "cd client && ng build --output-path ../public --watch",            
+    "build-client": "cd client && ng build --output-path ../public -prod",    
+    "start:prod": "npm run build-client --output-path ../public -prod && node server.js",
+    "start": "concurrently \"npm run build-client:dev\" \"npm run server\""
+  },
+  "nodemonConfig": {
+    "ignore": ["client/*", ".vscode/*"],
+    "delay": "2500"
   },
   "keywords": [
     "Authentication",

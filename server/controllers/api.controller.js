@@ -1,19 +1,18 @@
 class ApiController {
 
   constructor(router) {
-    router.get('/', this.getRoot.bind(this));
-    router.get('/api', this.getApiRoot.bind(this));
+    router.get('/', this.getIndex.bind(this));
+    router.get('/api', this.getApiIndex.bind(this));
   }
 
   //returns / root of server
-  getRoot(req, res) {
-    console.log('*** getRoot - /');
-    res.status(200);
-    res.json('Welcome to authentification prototype!');
+  getIndex(req, res) {
+    console.log('*** get index.html - /');
+    res.sendfile('../public/index.html');
   }
 
   //returns /api root of api
-  getApiRoot(req, res) {
+  getApiIndex(req, res) {
     console.log('*** getApi - /api');
     res.status(200);
     res.json('Welcome to API please authenticate for further proceed!');
