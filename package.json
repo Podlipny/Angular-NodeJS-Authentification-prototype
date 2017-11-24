@@ -8,7 +8,7 @@
     "tsc:w": "tsc -w",
     "lint": "concurrently \"tsc:w\" \"nodemon server.js\"",
     
-    "server": "set NODE_ENV=development&& nodemon server.js -l",
+    "server": "set NODE_ENV=development&& nodemon server.js",
     "lite-server": "lite-server -c lite-server.config.json",
     
     "install:prod": "npm install --only=production",
@@ -17,15 +17,14 @@
     "build-client": "cd client && ng build --output-path ../public -prod",
     
     "start:prod": "npm run build-client --output-path ../public -prod && node server.js",
-    "start:watch": "concurrently \"npm run build-client:dev\" \"lite-server -c lite-server.config.json\"",    
+    "start:watch": "concurrently --kill-others \"npm run build-client:dev\" \"lite-server -c lite-server.config.json\"",    
     "start": "concurrently \"npm run build-client:dev\" \"npm run server\""
   },
   "nodemonConfig": {
     "ignore": [
       "client/*",
       ".vscode/*"
-    ],
-    "delay": "2500"
+    ]
   },
   "keywords": [
     "Authentication",
