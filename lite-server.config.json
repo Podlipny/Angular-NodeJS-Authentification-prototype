@@ -1,0 +1,12 @@
+{ 
+  "injectChanges": true,
+  "files": ["./**/*.{html,css,js,png,jpg,svg,gif}"],
+  "server": { "baseDir": "./public" },
+  "watchOptions": { 
+    "ignored": [
+      "node_modules",
+      ".vscode/**",
+      "client/**"
+    ]
+  }
+}
