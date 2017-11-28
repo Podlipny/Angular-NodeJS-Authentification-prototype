@@ -1,13 +1,16 @@
-const FacebookStrategy = require('passport-facebook').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
 const passportConfig   = require('../config/passport.config');
 const userRepo         = require('../repositories/user.repository');
 
-class PassportFacebook{
+class PassportTwitter{
 
   config(passport){
-    var fbStrategy = passportConfig.facebookAuth;
-    fbStrategy.passReqToCallback = true;  //allows us to pass in the req from our route (lets us check if a user is logged in or not)
-    passport.use(new FacebookStrategy(fbStrategy, this.authenticate.bind(this)));
+    passport.use(new TwitterStrategy({
+      consumerKey     : passportConfig.twitterAuth.consumerKey,
+      consumerSecret  : passportConfig.twitterAuth.consumerSecret,
+      callbackURL     : passportConfig.twitterAuth.callbackURL,
+      passReqToCallback : true }, //allows us to pass in the req from our route (lets us check if a user is logged in or not)
+      this.authenticate.bind(this)));
   }
 
   authenticate(req, token, refreshToken, profile, done) {
@@ -15,16 +18,16 @@ class PassportFacebook{
     process.nextTick(function () {
       //check if the user is already logged in
       if (!req.user) {
-        userRepo.getUser({ 'facebook.id': profile.id }, function (err, user) {
+        userRepo.getUser({ 'twitter.id': profile.id }, function (err, user) {
           if (err) 
             return done(err);
             
           if (user) {
             //if there is a user id already but no token (user was linked at one point and then removed)
-            if (!user.facebook.token) {
-              user.facebook.token = token;
-              user.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
-              user.facebook.email = (profile.emails[0].value || '').toLowerCase();
+            if (!user.twitter.token) {
+              user.twitter.token = token;
+              user.twitter.username = profile.username;
+              user.twitter.displayName = profile.displayName;
 
               userRepo.updateUser(user.id, user, function (err) {
                 if (err) 
@@ -38,12 +41,12 @@ class PassportFacebook{
           } else {
             //if there is no user, create them
             var newUser = {
-              email: (profile.emails[0].value || '').toLowerCase(),
-              facebook: {
+              //twitter won't return email - we have to ask user in reg/profile form
+              twitter: {
                 id: profile.id,
                 token: token,
-                name: profile.name.givenName + ' ' + profile.name.familyName,
-                email: (profile.emails[0].value || '').toLowerCase()
+                username: profile.username,
+                displayName: profile.displayName
               }
             };
   
@@ -59,10 +62,10 @@ class PassportFacebook{
         //user already exists and is logged in, we have to link accounts
         var user = req.user; //pull the user out of the session
 
-        user.facebook.id = profile.id;
-        user.facebook.token = token;
-        user.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
-        user.facebook.email = (profile.emails[0].value || '').toLowerCase();
+        user.twitter.id = profile.id;
+        user.twitter.token = token;
+        user.twitter.username    = profile.username;
+        user.twitter.displayName = profile.displayName;
 
         userRepo.updateUser(user.id, user, function (err) {
           if (err) 
@@ -73,7 +76,8 @@ class PassportFacebook{
       }
     });
   }
+
 }
 
-const passportFacebook = new PassportFacebook();
-module.exports = passportFacebook.config.bind(passportFacebook);
+const passportTwitter = new PassportTwitter();
+module.exports = passportTwitter.config.bind(passportTwitter);

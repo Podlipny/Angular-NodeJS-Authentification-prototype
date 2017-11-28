@@ -10,12 +10,21 @@ class AuthController {
     });
 
     router.get('/facebook', passport.authenticate('facebook', { scope : ['public_profile', 'email'] }));
-    
     //handle the callback after facebook has authenticated the user
     router.get('/facebook/callback', this.login(passport, 'facebook'));
 
+    router.get('/twitter', passport.authenticate('twitter', { scope : 'email' }));
+    //handle the callback after twitter has authenticated the user
+    router.get('/twitter/callback', this.login(passport, 'twitter'));
+
   }
   
+  /** 
+   * 
+   * @param {passport} passport handler for passport
+   * @param {string} strategy type of strategy
+   * @memberof AuthController
+   */
   login(passport, strategy) {
     return (req, res, next) => {
       passport.authenticate(strategy, function(err, user, info) {

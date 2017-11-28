@@ -7,17 +7,13 @@
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "lint": "concurrently \"tsc:w\" \"nodemon server.js\"",
-    
     "server": "set NODE_ENV=development&& nodemon server.js",
     "lite-server": "lite-server -c lite-server.config.json",
-    
     "install:prod": "npm install --only=production",
-    
     "build-client:dev": "cd client && ng build --output-path ../public --watch",
     "build-client": "cd client && ng build --output-path ../public -prod",
-    
     "start:prod": "npm run build-client --output-path ../public -prod && node server.js",
-    "start:watch": "concurrently --kill-others \"npm run build-client:dev\" \"lite-server -c lite-server.config.json\"",    
+    "start:watch": "concurrently --kill-others \"npm run build-client:dev\" \"lite-server -c lite-server.config.json\"",
     "start": "concurrently \"npm run build-client:dev\" \"npm run server\""
   },
   "nodemonConfig": {
@@ -46,6 +42,7 @@
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.4",
     "string-template": "^1.0.0"
   },
   "devDependencies": {
