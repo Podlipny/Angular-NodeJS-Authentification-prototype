@@ -1,0 +1,12 @@
+<div id="dashboard" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card *ngIf="!isAuthenticated">
+    <mat-card-title>Authentication options</mat-card-title>
+    
+    <router-outlet></router-outlet>
+    
+    <mat-card-footer fxLayoutAlign="center center">Developed by Jiri Podlipny</mat-card-footer>
+  </mat-card>
+</div>
+
+<mat-card layout="row" *ngIf="isAuthenticated">is logged in</mat-card>
+ 

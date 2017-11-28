@@ -1,0 +1,19 @@
+#dashboard{
+  margin: 40px 0px 0px 0px;
+}
+
+.mat-card{
+  min-width: 595px;
+}
+
+.button-row{
+  margin: 20px;
+}
+
+::ng-deep .button-row button{
+  margin: 10px;
+}
+
+.mat-card-footer{
+  margin: 0px 10px 0px 0px;
+}
