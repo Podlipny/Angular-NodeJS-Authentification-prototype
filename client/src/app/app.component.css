@@ -1,0 +1,7 @@
+.container {
+  display:flex;
+  padding: 100px;
+  width:100%;
+  flex-flow:row wrap;
+  justify-content: space-between;
+}
