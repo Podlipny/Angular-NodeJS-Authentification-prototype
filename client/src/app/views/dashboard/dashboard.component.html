@@ -4,7 +4,7 @@
 
     <div class="jumbotron">
       <h1 class="display-5">Authentification</h1>
-      <p>Please login.</p>
+      <p>Choose way how you want to sign in.</p>
       <div class="button-row row justify-content-center">
         <a class="btn btn-secondary" routerLink="Login">Login</a>
         <a class="btn btn-secondary" routerLink="Register">Register</a>
@@ -16,8 +16,9 @@
     </div>
   </div>
 
-  <!-- Dasboard part -->
-  <div [hidden]="!isAuthenticated">
-    logged in
-  </div>
+</div>
+
+<!-- Dasboard part -->
+<div [hidden]="!isAuthenticated">
+  logged in
 </div>
