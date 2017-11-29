@@ -2,23 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
-import { LoginComponent } from './login/login.component';
-import { LocalLoginComponent } from './local-login/local-login.component';
-import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: DashboardComponent,
-    children: [
-      {
-        path: '',
-        component: LoginComponent,
-      },
-      { path: 'login', component: LocalLoginComponent, data: { title: 'Login' } },
-      { path: 'register', component: RegisterComponent, data: { title: 'Register' } },
-    ]
-  }
+  { path: '', component: DashboardComponent },
+  { path: 'Profile', component: ProfileComponent }
 ];
 
 @NgModule({
@@ -27,6 +15,9 @@ const routes: Routes = [
 })
 export class DashboardRoutingModule { }
 
-export const routedComponents = [DashboardComponent, LoginComponent, LocalLoginComponent, RegisterComponent];
+export const RoutedDashboardComponents = [
+  DashboardComponent,
+  ProfileComponent
+];
 
 

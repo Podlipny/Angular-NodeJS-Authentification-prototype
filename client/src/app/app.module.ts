@@ -1,30 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, RoutedAppComponents } from './app-routing.module';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { ProfileComponent } from './views/profile/profile.component';
 
-import { AuthService } from './services/auth.service';
+
+import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { DashboardModule } from './views/dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent
+    RoutedAppComponents
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
 
+    CoreModule,
+    SharedModule,
     DashboardModule,
-    SharedModule
   ],
-  providers: [AuthService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

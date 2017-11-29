@@ -1,12 +1,23 @@
-<div id="dashboard" fxLayout="row" fxLayoutAlign="center center">
-  <mat-card *ngIf="!isAuthenticated">
-    <mat-card-title>Authentication options</mat-card-title>
-    
-    <router-outlet></router-outlet>
-    
-    <mat-card-footer fxLayoutAlign="center center">Developed by Jiri Podlipny</mat-card-footer>
-  </mat-card>
-</div>
+<!-- Login part -->
+<div class="container">
+  <div id="dashboard" class="row justify-content-center" [hidden]="isAuthenticated">
 
-<mat-card layout="row" *ngIf="isAuthenticated">is logged in</mat-card>
- 
+    <div class="jumbotron">
+      <h1 class="display-5">Authentification</h1>
+      <p>Please login.</p>
+      <div class="button-row row justify-content-center">
+        <a class="btn btn-secondary" routerLink="Login">Login</a>
+        <a class="btn btn-secondary" routerLink="Register">Register</a>
+        <a class="btn btn-primary"><span class="fa fa-facebook"></span>  &nbsp;Facebook</a>
+        <a class="btn btn-info"><span class="fa fa-twitter"></span> &nbsp;Twitter</a>
+        <a class="btn btn-danger"><span class="fa fa-google-plus"></span>	&nbsp;Google+</a>
+      </div>
+      <p class="row justify-content-center">Developed by Jiri Podlipny</p>      
+    </div>
+  </div>
+
+  <!-- Dasboard part -->
+  <div [hidden]="!isAuthenticated">
+    logged in
+  </div>
+</div>

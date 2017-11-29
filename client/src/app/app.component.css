@@ -1,7 +1,15 @@
-.container {
-  display:flex;
-  padding: 100px;
-  width:100%;
-  flex-flow:row wrap;
-  justify-content: space-between;
+::ng-deep #dashboard{
+  margin: 40px 0px 0px 0px;
 }
+
+::ng-deep #dashboard a{
+  color: white;
+  font-size: 11pt;
+  margin: 5px;
+}
+
+::ng-deep #dashboard a:active{
+  color: white;
+}
+
+

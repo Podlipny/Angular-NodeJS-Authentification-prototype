@@ -1,3 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~https://fonts.googleapis.com/icon?family=Material+Icons';
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~/../assets/bootstrap.min.css";
+@import "~/../assets/font-awesome.min.css";
+
+.navbar {
+  background-color: #262F36;
+}
+
+@media (min-width: 760px) {
+  #dashboard .jumbotron{
+    margin: 0px 0px 0px 0px;
+    min-width: 750px;
+  }
+}

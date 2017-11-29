@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-
-import { DashboardRoutingModule, routedComponents } from './dashboard-routing.module';
 import { SharedModule } from '../../shared/shared.module';
+import { DashboardRoutingModule, RoutedDashboardComponents } from './dashboard-routing.module';
 
 @NgModule({
-  imports: [DashboardRoutingModule, SharedModule],
-  declarations: [routedComponents]
+  imports: [
+    SharedModule,
+    DashboardRoutingModule,
+  ],
+  declarations: [RoutedDashboardComponents]
 })
 export class DashboardModule { }
