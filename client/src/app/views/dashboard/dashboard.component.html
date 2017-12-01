@@ -1,6 +1,6 @@
 <!-- Login part -->
 <div class="container">
-  <div id="dashboard" class="row justify-content-center" [hidden]="isAuthenticated">
+  <div id="dashboard" class="row justify-content-center" *ngIf="!isAuthenticated else dashboard">
 
     <div class="jumbotron">
       <h1 class="display-5">Authentification</h1>
@@ -19,6 +19,8 @@
 </div>
 
 <!-- Dasboard part -->
-<div [hidden]="!isAuthenticated">
-  logged in
-</div>
+<ng-template #dashboard>
+  <div>
+    logged in
+  </div>
+</ng-template>

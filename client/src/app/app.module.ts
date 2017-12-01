@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AppRoutingModule, RoutedAppComponents } from './app-routing.module';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -18,7 +20,9 @@ import { DashboardModule } from './views/dashboard/dashboard.module';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     AppRoutingModule,
 
     CoreModule,
