@@ -35,6 +35,13 @@ class UserRepository{
     let user = new userModel();
     user.name = body.name;
     user.email = body.email;
+    user.address = body.address;
+    user.address2 = body.address2;
+    user.city = body.city;
+    user.zip = body.zip;
+    user.country = body.country;
+    user.phone = body.phone;
+    
     if(body.local){
       user.local = {
         email: body.local.email,
